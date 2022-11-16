@@ -1,0 +1,43 @@
+package com.codeup.springblog.controllers;
+
+
+import com.codeup.springblog.models.Coffee;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping("/coffee")
+public class CoffeeController {
+
+    @GetMapping
+    public String coffee(){
+        return "coffee";
+    }
+
+    @GetMapping("/{roast}")
+    public String roast(@PathVariable String roast, Model model){
+//        model.addAttribute("roast", roast);
+        Coffee selection = new Coffee(roast, "Cool Beans");
+        Coffee selection2 = new Coffee(roast, "Coffee Bros");
+
+        selection.setRoast(roast);
+        selection2.setRoast(roast);
+
+        selection.setOrigin("Ethiopia");
+        selection.setOrigin("Vietnam");
+        List<Coffee> selections = new ArrayList<>(List.of(selection,selection2));
+        model.addAttribute("selection", selections);
+        return "coffee";
+    }
+
+    @PostMapping
+    public String signUp(@RequestParam(name="email")String email, Model model){
+        model.addAttribute("email", email);
+        return "coffee";
+    }
+
+}
