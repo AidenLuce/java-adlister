@@ -30,7 +30,7 @@ public class CoffeeController {
         selection.setOrigin("Ethiopia");
         selection.setOrigin("Vietnam");
         List<Coffee> selections = new ArrayList<>(List.of(selection,selection2));
-        model.addAttribute("selection", selections);
+        model.addAttribute("selections", selections);
         return "coffee";
     }
 
