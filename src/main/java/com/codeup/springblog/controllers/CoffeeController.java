@@ -42,9 +42,29 @@ public class CoffeeController {
         return "coffee";
     }
 
-//    public String addCoffeeForm(){
-//
-//    }
+    @GetMapping("/all-coffees")
+    public String allCoffees(Model model){
+        List<Coffee> coffees = coffeeDao.findAll();
+        model.addAttribute("coffees", coffees);
+        return "all-coffees";
+    }
+
+    @GetMapping("/new")
+    public String addCoffeeForm(){
+        return "create-coffee";
+    }
+
+    @PostMapping("/new")
+    public String addCoffee(@RequestParam(name="roast")String roast,
+                            @RequestParam(name="origin")String origin,
+                            @RequestParam(name="brand")String brand){
+        Coffee coffee = new Coffee(roast,origin,brand);
+        coffeeDao.save(coffee);
+        return "redirect:/coffee/all-coffees";
+    }
+
+
+
 
     @PostMapping
     public String signUp(@RequestParam(name="email")String email, Model model){

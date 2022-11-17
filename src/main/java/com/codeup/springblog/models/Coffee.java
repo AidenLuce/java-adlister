@@ -32,6 +32,16 @@ public class Coffee {
         this.brand = brand;
     }
 
+    public Coffee(String roast, String origin, String brand){
+        this.roast = roast;
+        this.brand = brand;
+        this.origin = origin;
+    }
+
+
+
+
+
     public String getRoast() {
         return roast;
     }
@@ -62,3 +72,4 @@ public class Coffee {
 
     public void setId(long id) {this.id = id;}
 }
+
