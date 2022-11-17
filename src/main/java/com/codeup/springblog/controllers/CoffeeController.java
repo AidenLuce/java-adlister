@@ -27,8 +27,8 @@ public class CoffeeController {
     }
 
     @GetMapping("/{roast}")
-    public String roast(@PathVariable String roast, Model model){
-//        model.addAttribute("roast", roast);
+    public String roast(@PathVariable(name = "roast") String roast, Model model){
+        model.addAttribute("roast", roast);
         Coffee selection = new Coffee(roast, "Cool Beans");
         Coffee selection2 = new Coffee(roast, "Coffee Bros");
 
