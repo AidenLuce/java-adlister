@@ -12,7 +12,7 @@ public class DiceController {
     }
     @GetMapping("/roll-dice/n")
     public String result(){
-
+    return "DiceRollResult";
     }
 
 
