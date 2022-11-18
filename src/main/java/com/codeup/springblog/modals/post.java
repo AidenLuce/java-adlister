@@ -1,6 +1,6 @@
 package com.codeup.springblog.modals;
 
-public class post {
+public class post extends JpaRepository{
 
     private long id;
     private String title;
@@ -43,6 +43,8 @@ public class post {
     }
 }
 
+@Entity
+@Table (name="")
 
 //
 
