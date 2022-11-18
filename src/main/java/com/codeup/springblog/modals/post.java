@@ -43,8 +43,7 @@ public class post extends JpaRepository{
     }
 }
 
-@Entity
-@Table (name="")
+
 
 //
 
