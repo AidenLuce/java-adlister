@@ -1,7 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class DiceController {
@@ -10,10 +10,17 @@ public class DiceController {
     public String guess(){
         return "guessNum";
     }
-    @GetMapping("/roll-dice/n")
-    public String result(){
-    return "DiceRollResult";
+    @PostMapping("/roll-dice")
+    public String guessPost(@RequestParam("roll") int number){
+        return "redirect:/roll-dice/"+number;
     }
-
-
+    @GetMapping("/roll-dice/{number}")
+    @ResponseBody
+    public String result(@PathVariable("number") int number) {
+        double numResult = Math.floor(Math.random() * 6 + 1);
+        if (number == numResult) {
+            return "Good guess! You rolled a " + numResult + "!";
+        }
+        return String.format("Better luck next time.\nYou guessed "+ number+" and rolled a "+ numResult);
+    }
 }
