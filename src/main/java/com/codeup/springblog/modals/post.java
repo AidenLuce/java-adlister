@@ -1,13 +1,18 @@
 package com.codeup.springblog.modals;
 
 import javax.persistence.*;
-
+@Entity
+@Table(name="Repo_Jpa_database")
 public class post{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String title;
-    private String body;
 
+    @Column(nullable = false, length = 25)
+    private String title;
+
+    @Column(nullable = false, length = 250)
+    private String body;
 
     public String getTitle() {
         return title;
@@ -42,19 +47,6 @@ public class post{
         this.id = id;
         this.title = title;
         this.body = body;
-    }
-    @Entity
-    @Table(name="Repo_Jpa_database")
-    public class postApplication {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
-
-        @Column(nullable = false, length = 25)
-        private String header;
-
-        @Column(nullable = false, length = 250)
-        private String body;
     }
 }
 
