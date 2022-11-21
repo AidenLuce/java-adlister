@@ -17,6 +17,18 @@ public class PostController {
         this.PostDao = PostDao;
     }
 
+//    http://localhost:8080/posts/new/post
+    @GetMapping("/new/post")
+    public String title(){
+        return "Post";
+    }
+
+    @PostMapping("/new/post")
+    public String titlePost(@RequestParam("title") String title, @RequestParam("body") String body){
+        return (title);
+    }
+
+
 
     @GetMapping ("/index")
     public String allPosts(Model model){

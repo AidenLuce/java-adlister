@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Post App</title>
@@ -9,12 +9,12 @@
 <body>
 <form>
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+        <label for="title" class="form-label">Email address</label>
+        <input class="form-control" id="title" name="title" placeholder="Title">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="body" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="body"  name="body" rows="3"></textarea>
     </div>
     <button type="submit">Post</button>
 </form>
