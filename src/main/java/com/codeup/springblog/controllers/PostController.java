@@ -29,6 +29,12 @@ public class PostController {
         PostDao.save(postCard);
         return "posts";
     }
+    @GetMapping("/allPosts")
+    public String allCoffees(Model model){
+        List<post> posts = PostDao.findAll();
+        model.addAttribute("posts", posts);
+        return "allPosts";
+    }
 
 
 
