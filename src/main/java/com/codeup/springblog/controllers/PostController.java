@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.modals.post;
+import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/posts")
 public class PostController {
+
+    public PostController(PostRepository PostDao){
+        this.PostDao = PostDao;
+    }
+
 
     @GetMapping ("/index")
     public String allPosts(Model model){
