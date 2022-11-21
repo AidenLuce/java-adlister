@@ -20,12 +20,14 @@ public class PostController {
 //    http://localhost:8080/posts/new/post
     @GetMapping("/new/post")
     public String title(){
-        return "Post";
+        return "posts";
     }
 
-    @PostMapping("/new/post")
-    public String titlePost(@RequestParam("title") String title, @RequestParam("body") String body){
-        return (title);
+    @PostMapping("/new")
+    public String newPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
+        post postCard = new post(title,body);
+        PostDao.save(postCard);
+        return "posts";
     }
 
 
