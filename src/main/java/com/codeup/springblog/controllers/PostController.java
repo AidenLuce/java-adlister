@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/posts")
 public class PostController {
-
+    private final PostRepository PostDao;
     public PostController(PostRepository PostDao){
         this.PostDao = PostDao;
     }
