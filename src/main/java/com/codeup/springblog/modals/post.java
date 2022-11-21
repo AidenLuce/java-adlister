@@ -1,6 +1,8 @@
 package com.codeup.springblog.modals;
 
-public class post extends JpaRepository{
+import javax.persistence.*;
+
+public class post{
 
     private long id;
     private String title;
@@ -40,6 +42,19 @@ public class post extends JpaRepository{
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+    @Entity
+    @Table(name="Repo_Jpa_database")
+    public class postApplication {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private long id;
+
+        @Column(nullable = false, length = 25)
+        private String header;
+
+        @Column(nullable = false, length = 250)
+        private String body;
     }
 }
 
