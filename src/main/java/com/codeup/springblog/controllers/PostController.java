@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/posts")
@@ -26,14 +27,17 @@ public class PostController {
     @PostMapping("/new")
     public String newPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
         post postCard = new post(title,body);
-        PostDao.save(postCard);
+        if(!postCard.getTitle().equals("") && !postCard.getBody().equals("")) {
+            PostDao.save(postCard);
+            return "redirect:/posts/allPosts";
+        }
         return "posts";
     }
     @GetMapping("/allPosts")
     public String allCoffees(Model model){
         List<post> posts = PostDao.findAll();
         model.addAttribute("posts", posts);
-        return "allPosts";
+        return "posts";
     }
 
 
@@ -67,6 +71,6 @@ public class PostController {
     @GetMapping ("/create")
     @ResponseBody
     public String create(){
-        return "view the form for creating a post";
+        return "Go to http://localhost:8080/posts/new/post to view the form for creating a post.";
     }
 }

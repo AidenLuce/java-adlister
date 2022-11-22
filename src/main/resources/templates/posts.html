@@ -19,6 +19,20 @@
     <button type="submit">Post</button>
     <button><a href="http://localhost:8080/posts/allPosts">All Posts</a></button>
 </form>
+<!--<div>-->
+<!--    <ul>-->
+<!--        <li th:each="post : ${posts}">-->
+<!--            <span th:text="${post.title}"></span>,-->
+<!--            <span th:text="${post.body}"></span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<div class="card" style="width: 18rem;" th:each="post : ${posts}">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${post.title}"></h5>
+        <p class="card-text" th:text="${post.body}"></p>
+    </div>
+</div>
 
 
 <!-- JavaScript Bundle with Popper -->
