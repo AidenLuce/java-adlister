@@ -11,8 +11,21 @@ public class post{
     @Column(nullable = false, length = 25)
     private String title;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Column(nullable = false, length = 250)
     private String body;
+
+
 
     public String getTitle() {
         return title;

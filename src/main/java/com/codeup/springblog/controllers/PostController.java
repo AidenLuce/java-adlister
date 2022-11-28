@@ -1,21 +1,24 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.modals.User;
 import com.codeup.springblog.modals.post;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/posts")
 public class PostController {
     private final PostRepository PostDao;
-    public PostController(PostRepository PostDao){
+    private final UserRepository UserDao;
+    public PostController(PostRepository PostDao, UserRepository userDao){
         this.PostDao = PostDao;
+        this.UserDao = userDao;
     }
 
 //    http://localhost:8080/posts/new/post
@@ -28,6 +31,8 @@ public class PostController {
     public String newPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
         post postCard = new post(title,body);
         if(!postCard.getTitle().equals("") && !postCard.getBody().equals("")) {
+            User user  = UserDao.getById(1L);
+            postCard.setUser(user);
             PostDao.save(postCard);
             return "redirect:/posts/allPosts";
         }
@@ -35,6 +40,8 @@ public class PostController {
     }
     @GetMapping("/allPosts")
     public String allCoffees(Model model){
+        User user = UserDao.getById(1L);
+        model.addAttribute("user",user);
         List<post> posts = PostDao.findAll();
         model.addAttribute("posts", posts);
         return "posts";

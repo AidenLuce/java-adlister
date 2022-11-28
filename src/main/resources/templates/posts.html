@@ -7,35 +7,51 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-<form action="/posts/new" method="post">
-    <div class="mb-3">
-        <label for="title" class="form-label">Email address</label>
-        <input class="form-control" id="title" name="title" placeholder="Title">
+<!-- NAV bar -->
+<nav class="navbar sticky-top bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="data:image/png;base64,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"
+                 alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            <span th:text="${user.getUsername()}" class="text-white"></span>
+        </a>
     </div>
-    <div class="mb-3">
-        <label for="body" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="body"  name="body" rows="3"></textarea>
+</nav>
+
+<!-- Post creation form -->
+<div class="d-flex">
+    <div class="col-3 border border-primary border-4">
+        <form action="/posts/new" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea class="form-control" id="body"  name="body" rows="3" placeholder="Type something"></textarea>
+            </div>
+            <button type="submit" class="text-right">Post</button>
+        </form>
     </div>
-    <button type="submit">Post</button>
-    <button><a href="http://localhost:8080/posts/allPosts">All Posts</a></button>
-</form>
-<!--<div>-->
-<!--    <ul>-->
-<!--        <li th:each="post : ${posts}">-->
-<!--            <span th:text="${post.title}"></span>,-->
-<!--            <span th:text="${post.body}"></span>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
-<div class="card" style="width: 18rem;" th:each="post : ${posts}">
-    <div class="card-body">
-        <h5 class="card-title" th:text="${post.title}"></h5>
-        <p class="card-text" th:text="${post.body}"></p>
+
+    <!-- Cards for each individual post -->
+    <div class="card col-3 border border-2 border-dark me-1" th:each="post : ${posts}">
+        <div class="card-body">
+            <p th:text="${post.getUser().getEmail()}"></p>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text" th:text="${post.body}"></p>
+            <p>    <a href="https://www.sprite.com/products/sprite-winter-spiced-cranberry"></a></p>
+        </div>
     </div>
 </div>
-
+<!--        Ads   -->
+<div>
+    <img src="https://thumbs.gfycat.com/HappygoluckyAdventurousCaimanlizard-max-1mb.gif">
+    <a href="https://www.sprite.com/products/sprite-winter-spiced-cranberry"></a>
+</div>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 </body>
 </html>
