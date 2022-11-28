@@ -17,7 +17,7 @@ import java.util.List;
 public class CoffeeController {
 
     private final CoffeeRepository coffeeDao;
-    private final SupplierRepository supplierDao;
+    private final SupplierRepository supplierDao = null;
 
 
     public CoffeeController(CoffeeRepository coffeeDao, SupplierRepository suppliersDao){
@@ -74,6 +74,7 @@ public class CoffeeController {
                             @RequestParam(name="brand")String brand),
                             @RequestParam(name = "supplier")String supplier)
     {
+        Supplier supplier = supplierDao.findAll();
         Coffee coffee = new Coffee(roast,origin,brand,supplier);
         coffeeDao.save(coffee);
         return "redirect:/coffee/all-coffees";
