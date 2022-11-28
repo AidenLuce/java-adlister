@@ -17,41 +17,48 @@
         </a>
     </div>
 </nav>
-
-<!-- Post creation form -->
-<div class="d-flex">
-    <div class="col-3 border border-primary border-4">
-        <form action="/posts/new" method="post">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input class="form-control" id="title" name="title" placeholder="Title">
-            </div>
-            <div class="mb-3">
-                <label for="body" class="form-label">Body</label>
-                <textarea class="form-control" id="body"  name="body" rows="3" placeholder="Type something"></textarea>
-            </div>
-            <button type="submit" class="text-right">Post</button>
-        </form>
+<!-- Sudo Body-->
+<div class="row col-12 d-flex">
+<!-- Sidebar -->
+<div class="col-5">
+    <!-- Post creation form -->
+        <div class=" border border-primary border-4 d-flex">
+            <form action="/posts/new" method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input class="form-control" id="title" name="title" placeholder="Title">
+                </div>
+                <div class="mb-3">
+                    <label for="body" class="form-label">Body</label>
+                    <textarea class="form-control" id="body"  name="body" rows="6" placeholder="Type something"></textarea>
+                </div>
+                <button type="submit" class="text-right">Post</button>
+            </form>
+        </div>
+    <!--        Ads   -->
+    <div >
+        <img src="https://media.tenor.com/ytJJIBTiPHoAAAAC/raising-canes-chicken-fingers.gif" alt="Logo" width="285" height="175">
+        <img src="https://thumbs.gfycat.com/HappygoluckyAdventurousCaimanlizard-max-1mb.gif" alt="Logo" width="285" height="175">
+        <a href="https://www.sprite.com/products/sprite-winter-spiced-cranberry"></a>
     </div>
-
+</div>
+<!-- Posts Column -->
+<div class="col-7 row">
     <!-- Cards for each individual post -->
-    <div class="card col-3 border border-2 border-dark me-1" th:each="post : ${posts}">
+    <div class="card border border-2 border-dark  d-flex col-4 " th:each="post : ${posts}">
         <div class="card-body">
-            <p th:text="${post.getUser().getEmail()}"></p>
+            <p th:text="${post.getUser().getEmail()}" class="text-muted"></p>
             <h5 class="card-title" th:text="${post.title}"></h5>
             <p class="card-text" th:text="${post.body}"></p>
-            <p>    <a href="https://www.sprite.com/products/sprite-winter-spiced-cranberry"></a></p>
         </div>
     </div>
 </div>
-<!--        Ads   -->
-<div>
-    <img src="https://thumbs.gfycat.com/HappygoluckyAdventurousCaimanlizard-max-1mb.gif">
-    <a href="https://www.sprite.com/products/sprite-winter-spiced-cranberry"></a>
+<!--    end of body-->
 </div>
+
+
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
 </body>
 </html>
