@@ -92,4 +92,23 @@ public class PostController {
     public String create(){
         return "Go to http://localhost:8080/posts/new/post to view the form for creating a post.";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editPostForm(@PathVariable long id, Model model){
+        post post = PostDao.getById(id);
+        model.addAttribute("post", post);
+        return "edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public  String edit(@ModelAttribute post post){
+    User user = UserDao.getById(1L);
+        post.setUser(user);
+        PostDao.save(post);
+        return "edit";
+    }
+
+
 }
+
+
