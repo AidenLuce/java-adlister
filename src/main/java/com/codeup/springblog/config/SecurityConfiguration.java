@@ -21,12 +21,14 @@ public class SecurityConfiguration {
         http.authorizeRequests()
                 .antMatchers("/posts/allPosts", "/posts/{id}/edit").authenticated()
                 .antMatchers("/posts").permitAll()
-            .and().formLogin()
+            .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts")
+            .and().logout()
             .and().httpBasic();
         return http.build();
     }
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
+        return
+//        return NoOpPasswordEncoder.getInstance();
     }
 }
