@@ -27,21 +27,33 @@ public class PostController {
         return "posts";
     }
 
+//    @PostMapping("/new")
+//    public String postPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
+//        post postCard = new post(title,body);
+//        if(!postCard.getTitle().equals("") && !postCard.getBody().equals("")) {
+//            User user  = UserDao.getById(1L);
+//            postCard.setUser(user);
+//            PostDao.save(postCard);
+//            return "redirect:/posts/allPosts";
+//        }
+//        return "posts";
+//    }
+
     @PostMapping("/new")
-    public String newPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
-        post postCard = new post(title,body);
-        if(!postCard.getTitle().equals("") && !postCard.getBody().equals("")) {
+    public String newPost(@ModelAttribute post post){
             User user  = UserDao.getById(1L);
-            postCard.setUser(user);
-            PostDao.save(postCard);
+            post.setUser(user);
+            PostDao.save(post);
             return "redirect:/posts/allPosts";
         }
-        return "posts";
-    }
+
+
+
     @GetMapping("/allPosts")
     public String allCoffees(Model model){
         User user = UserDao.getById(1L);
         model.addAttribute("user",user);
+        model.addAttribute("post",new post());
         List<post> posts = PostDao.findAll();
         model.addAttribute("posts", posts);
         return "posts";
