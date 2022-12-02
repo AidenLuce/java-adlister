@@ -74,6 +74,17 @@
             <h5 class="card-title" th:text="${post.title}"></h5>
             <p class="card-text" th:text="${post.body}"></p>
 
+<div th:if="${post.commentList != null}">
+    <br><hr><br>
+            <ul th:each="comment: ${post.commentList}">
+                <li th:text="${comment.commentSec}"></li>
+            </ul>
+    <br><hr><br>
+</div>
+
+            <form th:if="${post.user.id} != ${#authentication.principal.id}" th:action="@{/posts/{id}/comment/{user_id}(id=${post.id}, user_id=${user.id})}" th:method="get">
+                <button>Comment</button>
+            </form>
             <form th:if="${post.user.id} == ${#authentication.principal.id}" th:action="@{/posts/{id}/edit(id=${post.id})}" th:method="get">
                 <button>Edit</button>
             </form>

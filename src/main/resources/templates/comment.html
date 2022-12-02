@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>edit</title>
+</head>
+<body>
+<div class=" border border-primary border-4 d-flex">
+  <form th:action="@{/posts/{id}/comment/{user_id}(id=${post.id}, user_id=${#authentication.principal.id})}" th:method="post" th:object="${post}">
+    <div class="mb-3">
+      Title:
+      <h2 class="form-control" th:text="*{title}"></h2>
+    </div>
+    <div class="mb-3">
+      Body:
+      <p class="form-control" th:text="*{body}"></p>
+    </div>
+    <div class="mb-3" th:object="${comment}">
+      <textarea th:field="*{commentSec}" class="form-control" rows="6" placeholder="State your opinion: "></textarea>
+    </div>
+    <button type="submit" class="text-right">Post</button>
+  </form>
+</div>
+</body>
+</html>

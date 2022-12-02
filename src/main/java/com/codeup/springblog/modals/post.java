@@ -1,6 +1,8 @@
 package com.codeup.springblog.modals;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="Repo_Jpa_database")
 public class post{
@@ -25,7 +27,16 @@ public class post{
     @Column(nullable = false, length = 250)
     private String body;
 
+    @OneToMany(mappedBy="post")
+    List<Comment> commentList;
 
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
 
     public String getTitle() {
         return title;

@@ -4,6 +4,7 @@ import com.codeup.springblog.modals.User;
 import com.codeup.springblog.modals.post;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,12 @@ import java.util.List;
 public class PostController {
     private final PostRepository PostDao;
     private final UserRepository UserDao;
-    public PostController(PostRepository PostDao, UserRepository userDao){
+
+    private final EmailService emailService;
+    public PostController(PostRepository PostDao, UserRepository userDao, EmailService emailService){
         this.PostDao = PostDao;
         this.UserDao = userDao;
+        this.emailService = emailService;
     }
 
 //    http://localhost:8080/posts/new/post
@@ -46,6 +50,7 @@ public class PostController {
             User user  = UserDao.getById(currentUserId);
             post.setUser(user);
             PostDao.save(post);
+            emailService.prepareAndSend(user, post.getTitle(), post.getBody());
             return "redirect:/posts/allPosts";
         }
 
