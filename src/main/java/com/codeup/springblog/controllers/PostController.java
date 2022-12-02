@@ -4,6 +4,7 @@ import com.codeup.springblog.modals.User;
 import com.codeup.springblog.modals.post;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,8 @@ public class PostController {
 
     @PostMapping("/new")
     public String newPost(@ModelAttribute post post){
-            User user  = UserDao.getById(1L);
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // this
+            User user  = UserDao.getById(currentUserId);
             post.setUser(user);
             PostDao.save(post);
             return "redirect:/posts/allPosts";
@@ -51,11 +53,14 @@ public class PostController {
 
     @GetMapping("/allPosts")
     public String allCoffees(Model model){
-        User user = UserDao.getById(1L);
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        User user = UserDao.getById(currentUserId);
         model.addAttribute("user",user);
         model.addAttribute("post",new post());
         List<post> posts = PostDao.findAll();
         model.addAttribute("posts", posts);
+
+
         return "posts";
     }
 
@@ -102,10 +107,18 @@ public class PostController {
 
     @PostMapping("/{id}/edit")
     public  String edit(@ModelAttribute post post){
-    User user = UserDao.getById(1L);
+        long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId(); // this
+        User user = UserDao.getById(currentUserId);
         post.setUser(user);
         PostDao.save(post);
-        return "edit";
+        return "redirect:/posts/allPosts";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable long id){
+        post post = PostDao.getById(id);
+        PostDao.delete(post);
+        return "redirect:/posts/allPosts";
     }
 
 

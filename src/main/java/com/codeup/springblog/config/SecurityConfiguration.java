@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,15 +21,14 @@ public class SecurityConfiguration {
             Exception {
         http.authorizeRequests()
                 .antMatchers("/posts/allPosts", "/posts/{id}/edit").authenticated()
-                .antMatchers("/posts").permitAll()
-            .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts")
-            .and().logout()
+                .antMatchers("/").permitAll()
+            .and().formLogin().loginPage("/login").defaultSuccessUrl("/posts/allPosts")
+            .and().logout().logoutSuccessUrl("/")
             .and().httpBasic();
         return http.build();
     }
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return
-//        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }
