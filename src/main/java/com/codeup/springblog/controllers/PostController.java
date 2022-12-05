@@ -32,6 +32,13 @@ public class PostController {
         return "posts";
     }
 
+//    @GetMapping("/{id}")
+//    public String onePost(@PathVariable long id, Model model){
+//        post post = PostDao.findById(id);
+//        model.addAttribute("post", post);
+//        return "/posts/show";
+//    }
+
 //    @PostMapping("/new")
 //    public String postPost(@RequestParam(name="title")String title, @RequestParam(name="body")String body){
 //        post postCard = new post(title,body);
@@ -57,7 +64,7 @@ public class PostController {
 
 
     @GetMapping("/allPosts")
-    public String allCoffees(Model model){
+    public String all(Model model){
         long currentUserId = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         User user = UserDao.getById(currentUserId);
         model.addAttribute("user",user);
@@ -65,7 +72,12 @@ public class PostController {
         List<post> posts = PostDao.findAll();
         model.addAttribute("posts", posts);
 
+        for(post post: posts){
 
+            if (post.getColor() == null || post.getColor() != null){
+                return "posts";}
+
+        }
         return "posts";
     }
 
@@ -82,17 +94,7 @@ public class PostController {
 
     @GetMapping ("/show/{id}")
     public String viewById(@PathVariable long id, Model model){
-        post post1 = new post(1,"First","this is the body");
-        post post2 = new post(2,"Second","this is the body");
-        post post3 = new post(3,"yo","wassup?");
-        List<post> allPosts = new ArrayList<>(List.of(post1, post2,post3));
-        model.addAttribute("postId", id);
-        post post = null;
-        for (post userPost : allPosts){
-            if(userPost.getId() == id){
-                post = userPost;
-            }
-        }
+      post post = PostDao.getById(id);
         model.addAttribute("post", post);
         return "/show";
     }

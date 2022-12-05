@@ -27,6 +27,9 @@ public class post{
     @Column(nullable = false, length = 250)
     private String body;
 
+    @Column(length = 10)
+    private Integer color;
+
     @OneToMany(mappedBy="post")
     List<Comment> commentList;
 
@@ -61,6 +64,15 @@ public class post{
     public void setId(long id) {
         this.id = id;
     }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public void setColor(Integer color) {
+        this.color = color;
+    }
+
     public post (){}
 
     public post(String title, String body) {
@@ -71,6 +83,12 @@ public class post{
         this.id = id;
         this.title = title;
         this.body = body;
+    }
+    public post (long id, String title, String body,Integer color){
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.color = color;
     }
 }
 
